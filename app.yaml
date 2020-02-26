@@ -1,0 +1,62 @@
+service: spoke
+runtime: nodejs10
+env: flex
+# instance_class: F2
+
+beta_settings:
+  cloud_sql_instances: tmcdev:us-west2:friends-of-agatha
+
+env_variables:
+  ALLOW_SEND_ALL: "false"
+  APOLLO_OPTICS_KEY: 
+  ASSETS_DIR: ./build/client/assets
+  ASSETS_MAP_FILE: assets.json
+  AUTH0_CLIENT_ID: 
+  AUTH0_CLIENT_SECRET: 
+  AUTH0_DOMAIN:
+  AWS_ACCESS_KEY_ID: 
+  AWS_S3_BUCKET_NAME: 
+  AWS_SECRET_ACCESS_KEY: 
+  BASE_URL:
+  CAMPAIGN_ID: 'campaign-id-hash'
+  DB_HOST: /cloudsql/tmcdev:us-west2:friends-of-agatha
+  DB_MAX_POOL: 10
+  DB_MIN_POOL: 2
+  # DB_NAME: spoke
+  # DB_USER: foa
+  # DB_PASSWORD: foobar123!
+  # DB_PORT: 5432
+  DB_TYPE: pg
+  # DB_USE_SSL: "false"
+  DEFAULT_SERVICE: twilio
+  # DEV_APP_PORT: 8090
+  DST_REFERENCE_TIMEZONE: 'America/Pacific'
+  EMAIL_FROM: 
+  EMAIL_HOST: 
+  EMAIL_HOST_PASSWORD: 
+  EMAIL_HOST_PORT: 
+  EMAIL_HOST_USER: 
+  HEROKU_APP_NAME: 
+  JOBS_SAME_PROCESS: 1
+  KNEX_MIGRATION_DIR: /spoke/build/server/migrations/
+  NEXMO_API_KEY: 
+  NEXMO_API_SECRET: 
+  NODE_ENV: production
+  OUTPUT_DIR: ./build
+  PASSPORT_STRATEGY: local
+  PHONE_NUMBER_COUNTRY: US
+  ROLLBAR_ACCESS_TOKEN: 
+  ROLLBAR_CLIENT_TOKEN: 
+  ROLLBAR_ENDPOINT: https://api.rollbar.com/api/1/item/
+  SESSION_SECRET: set_this_in_production
+  SUPPRESS_MIGRATIONS: 
+  SUPPRESS_SELF_INVITE: ""
+  TWILIO_API_KEY: AC6b10cc9cfc436b624dc76ee098e3e8d8
+  TWILIO_APPLICATION_SID: AC6ae18dae480ab245f0d02936856cec21
+  TWILIO_AUTH_TOKEN: a2f8beb1610016604157f0308c4115f6
+  TWILIO_MESSAGE_SERVICE_SID: SKaf2db46f70662391877c517ad4651ed1
+  TWILIO_MESSAGE_VALIDITY_PERIOD: 
+  TWILIO_SQS_QUEUE_URL: 
+  TWILIO_STATUS_CALLBACK_URL: https://<changeme>.herokuapp.com/twilio-message-report
+  WEBPACK_HOST: localhost
+  WEBPACK_PORT: 3000

@@ -29,7 +29,11 @@ ENV NODE_ENV=production \
     ASSETS_MAP_FILE=assets.json \
     JOBS_SAME_PROCESS=1
 
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN apk add --no-cache curl
 # Switch to non-root user https://github.com/nodejs/docker-node/blob/d4d52ac41b1f922242d3053665b00336a50a50b3/docs/BestPractices.md#non-root-user
-USER node
+# USER node
 EXPOSE 3000
-CMD ["npm", "start"]
+
+CMD ["/usr/local/bin/entrypoint.sh"]
