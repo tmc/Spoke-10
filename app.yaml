@@ -1,7 +1,7 @@
 service: spoke
 runtime: nodejs10
-env: flex
-# instance_class: F2
+# env: flex
+instance_class: F2
 
 beta_settings:
   cloud_sql_instances: tmcdev:us-west2:friends-of-agatha
@@ -19,12 +19,13 @@ env_variables:
   AWS_SECRET_ACCESS_KEY: 
   BASE_URL:
   CAMPAIGN_ID: 'campaign-id-hash'
+  NODE_DEBUG: fs
   DB_HOST: /cloudsql/tmcdev:us-west2:friends-of-agatha
   DB_MAX_POOL: 10
   DB_MIN_POOL: 2
-  # DB_NAME: spoke
-  # DB_USER: foa
-  # DB_PASSWORD: foobar123!
+  DB_NAME: foa
+  DB_USER: foa
+  DB_PASSWORD: foobar123!
   # DB_PORT: 5432
   DB_TYPE: pg
   # DB_USE_SSL: "false"
