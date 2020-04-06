@@ -1,6 +1,8 @@
-import { hasConfig, getConfig } from "../api/lib/config";
+import { getConfig, hasConfig } from "../api/lib/config";
 
 const canGoogleImport = hasConfig("GOOGLE_SECRET");
+const hasGTMContainerID = hasConfig("GOOGLE_TAG_MANAGER_ID");
+const GTMContainerID = getConfig("GOOGLE_TAG_MANAGER_ID");
 
 const rollbarScript = process.env.ROLLBAR_CLIENT_TOKEN
   ? `<script>
@@ -31,6 +33,13 @@ const externalLinks = process.env.NO_EXTERNAL_LINKS
   ? ""
   : '<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins">';
 
+const googleTagManagerHeadTag = hasGTMContainerID
+  ? `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','${GTMContainerID}');</script>`
+  : "";
+const googleTagManagerBodyTag = hasGTMContainerID
+  ? `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTMContainerID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`
+  : "";
+
 export default function renderIndex(html, css, assetMap, store) {
   return `
 <!DOCTYPE html>
@@ -40,6 +49,7 @@ export default function renderIndex(html, css, assetMap, store) {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>Spoke</title>
     ${externalLinks}
+    ${googleTagManagerHeadTag}
     <style>
       /* CSS declarations go here */
       body {
@@ -63,6 +73,7 @@ export default function renderIndex(html, css, assetMap, store) {
     <link rel="icon" href="https://s3-us-west-1.amazonaws.com/spoke-public/spoke_logo.svg">
   </head>
   <body>
+    ${googleTagManagerBodyTag}
     <div id="mount">${html}</div>
     <script>
       window.INITIAL_STATE=${JSON.stringify(store.getState())}
