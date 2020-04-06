@@ -770,7 +770,8 @@ export async function exportCampaign(job) {
   ) {
     try {
       const s3bucket = new AWS.S3({
-        params: { Bucket: process.env.AWS_S3_BUCKET_NAME }
+        params: { Bucket: process.env.AWS_S3_BUCKET_NAME },
+        endpoint: process.env.AWS_S3_ENDPOINT || undefined
       });
       const campaignTitle = campaign.title
         .replace(/ /g, "_")
