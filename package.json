@@ -23,6 +23,8 @@
     "prod-build-server": "babel ./src  -d ./build/server --source-maps --copy-files; babel ./migrations -d ./build/server/migrations/ --source-maps --copy-files",
     "prod-build": "npm run clean && npm run prod-build-client && npm run prod-build-server",
     "prod-static-upload": "if [ \"$S3_STATIC_PATH\" != \"\" ] ; then s3cmd sync --acl-public --guess-mime-type ./build/client/assets/ $S3_STATIC_PATH ; fi",
+    "gcp-build": "npm run prod-build-server && npm run prod-build-client",
+    "gcp-build-alt": "npm run clean && npm run prod-build-client && npm run prod-build-server",
     "postinstall": "if [ \"$NODE_ENV\" = production ] ; then npm run prod-build && npm run prod-static-upload && npm run install-config-file && npm run notify-slack; fi",
     "notify-slack": "if [ \"$SLACK_NOTIFY_URL\" != \"\" ] ; then echo notifying slack && curl -XPOST -d '{\"channel\": \"#spoke\", \"text\":\"'\"$(whoami) building spoke $(git log -1 --pretty=%h) for $AWS_S3_BUCKET_NAME\"'\"}' $SLACK_NOTIFY_URL; fi",
     "install-config-file": "if [ \"$CONFIG_FILE\" != \"\" ] ; then cp $CONFIG_FILE ./CONFIG_FILE.json; fi",
@@ -73,6 +75,7 @@
   "homepage": "https://github.com/MoveOnOrg/Spoke/#readme",
   "dependencies": {
     "@google-cloud/debug-agent": "^4.2.2",
+    "@google-cloud/profiler": "^4.0.0",
     "@google-cloud/trace-agent": "^4.2.5",
     "aphrodite": "^2.3.1",
     "apollo-client": "^0.4.7",

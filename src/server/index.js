@@ -1,6 +1,7 @@
 import "babel-polyfill";
 require("@google-cloud/trace-agent").start();
 require("@google-cloud/debug-agent").start();
+require("@google-cloud/profiler").start();
 import bodyParser from "body-parser";
 import express from "express";
 import appRenderer from "./middleware/app-renderer";
